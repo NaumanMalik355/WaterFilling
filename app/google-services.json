@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1064887092597",
+    "firebase_url": "https://nauman-marioplan.firebaseio.com",
+    "project_id": "nauman-marioplan",
+    "storage_bucket": "nauman-marioplan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064887092597:android:a56ef722824e38d899bf3c",
+        "android_client_info": {
+          "package_name": "com.example.wafill"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1064887092597-1cagh9prftqp34q063lnq91mpqe3ms0n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wafill",
+            "certificate_hash": "597842e38794bc5f415427361ec43ed1454a4867"
+          }
+        },
+        {
+          "client_id": "1064887092597-cc6usd3hh439oh7978noiql5ljfn57gr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBalK9MQ23O2ahFRYi1G-YstWMlrfnXXc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1064887092597-cc6usd3hh439oh7978noiql5ljfn57gr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
