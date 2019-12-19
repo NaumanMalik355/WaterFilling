@@ -46,7 +46,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:hint="Created At"
-                android:inputType="date"
                 android:textSize="15sp" />
 
             <EditText

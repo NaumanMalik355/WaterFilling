@@ -3,6 +3,7 @@ package com.example.wafill;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +27,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 public class addproduct extends AppCompatActivity {
@@ -37,7 +41,8 @@ public class addproduct extends AppCompatActivity {
     private FirebaseStorage storage;
     private StorageReference storageReference;
     DatabaseReference databaseReference;
-
+    Calendar calendar;
+    DatePickerDialog datePickerDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,24 @@ public class addproduct extends AppCompatActivity {
         btnCreateProduct = findViewById(R.id.createProductId);
         uploadImage.setEnabled(false);
         btnCreateProduct.setEnabled(false);
+        final Date da=new Date();
+
+        createdAt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar=Calendar.getInstance();
+                int day=calendar.get(Calendar.DAY_OF_MONTH);
+                int month=calendar.get(Calendar.MONTH);
+                int year=calendar.get(Calendar.YEAR);
+                datePickerDialog=new DatePickerDialog(addproduct.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
+                        createdAt.setText(mDay+"/"+(mMonth+1)+"/"+mYear);
+                    }
+                },day,month,year);
+                datePickerDialog.show();
+            }
+        });
 
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         storage = FirebaseStorage.getInstance();
@@ -85,7 +108,8 @@ public class addproduct extends AppCompatActivity {
     public void uploadingProduct(View view) {
         if (imageUri != null) {
             final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Creating new Product");
+//            progressDialog.setTitle("Creating new Product");
+            progressDialog.setCancelable(false);
             progressDialog.show();
 
             final StorageReference reference = storageReference.child("images/" + UUID.randomUUID().toString());
@@ -131,7 +155,7 @@ public class addproduct extends AppCompatActivity {
         products.imgURL=downloadUrl;
 
         databaseReference.child(id).setValue(products);
-
+        Toast.makeText(this, "New Product created", Toast.LENGTH_SHORT).show();
         productName.setText("");
         bottleSize.setText("");
         createdAt.setText("");

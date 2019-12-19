@@ -3,11 +3,15 @@ package com.example.wafill;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,12 +52,17 @@ public class Login extends AppCompatActivity {
         } else {
             email.setError(null);
             password.setError(null);
-
+            final ProgressDialog progressDialog=new ProgressDialog(this);
+            progressDialog.setMessage("Logging in. Please wait.");
+            progressDialog.setCancelable(false);
+            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            progressDialog.show();
             firebaseAuth.signInWithEmailAndPassword(emailInput, passwordInput)
                     .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                progressDialog.dismiss();
                                 Intent dashboardActivity = new Intent(Login.this, MainActivity.class);
                                 startActivity(dashboardActivity);
                             } else {

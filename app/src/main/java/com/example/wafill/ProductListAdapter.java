@@ -34,8 +34,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public void onBindViewHolder(@NonNull final ProductListViewHolder holder, int position) {
      //   final MyListData data = listData[position];
         holder.textView.setText(listData.get(position).productName);
-        holder.prodictId1.setText(Integer.toString(listData.get(position).bottleSize)+" Litre");
+        holder.prodictId1.setText("Litre: "+Integer.toString(listData.get(position).bottleSize));
         holder.txtDate.setText(listData.get(position).createdAt);
+        holder.textPrice.setText("Rs. "+Integer.toString(listData.get(position).price));
        // holder.imageView.setImageResource(listData.get(position).imgURL);
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +55,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public class ProductListViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
-        public TextView textView, prodictId1, txtDate;
+        public TextView textView, prodictId1, txtDate,textPrice;
         public RelativeLayout relativeLayout;
 
         public ProductListViewHolder(@NonNull View itemView) {
@@ -63,6 +64,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             textView = itemView.findViewById(R.id.textView);
             prodictId1 = itemView.findViewById(R.id.prodictId1);
             txtDate = itemView.findViewById(R.id.txtDate);
+            textPrice=itemView.findViewById(R.id.txtPrce);
             relativeLayout = itemView.findViewById(R.id.relativeLayoutProductList);
 
         }

@@ -1,7 +1,10 @@
 package com.example.wafill;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -46,11 +49,18 @@ public class MessageFragment extends Fragment {
         final ArrayList<Products> productsList = new ArrayList<>();
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userId = currentFirebaseUser.getUid();
+
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.ProductListRecycleriIew);
         final ProductListAdapter productListAdapter = new ProductListAdapter(productsList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(productListAdapter);
+
+        final ProgressDialog progressDialog=new ProgressDialog(getContext());
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progressDialog.setMessage("Loading. please wait");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
 
         floatingActionButton = view.findViewById(R.id.addImgId);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -80,8 +90,9 @@ public class MessageFragment extends Fragment {
                     // updated.productId=ds.getValue(Products.class).productId;
                         updated.price=ds.getValue(Products.class).price;
                         updated.bottleSize=ds.getValue(Products.class).bottleSize;
-
+                        updated.price=ds.getValue(Products.class).price;
                        productsList.add(updated);
+                       progressDialog.dismiss();
 
                     }
                    productListAdapter.notifyDataSetChanged();

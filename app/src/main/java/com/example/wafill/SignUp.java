@@ -3,11 +3,15 @@ package com.example.wafill;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -64,7 +68,10 @@ public class SignUp extends AppCompatActivity {
             address.setError(null);
             number.setError(null);
             password.setError(null);
-
+            final ProgressDialog progressDialog=new ProgressDialog(this);
+            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            progressDialog.setMessage("Loading. please wait");
+            progressDialog.show();
             firebaseAuth.createUserWithEmailAndPassword(emailInput,passwordInput)
                     .addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -77,6 +84,7 @@ public class SignUp extends AppCompatActivity {
                                         .setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
+                                        progressDialog.dismiss();
                                         Intent dashboardActivity = new Intent(SignUp.this, MainActivity.class);
                                         startActivity(dashboardActivity);
                                     }
