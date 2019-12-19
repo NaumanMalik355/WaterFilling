@@ -7,8 +7,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -35,28 +37,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //When we start our activity we will open this fragment
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessageFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_message);
+            navigationView.setCheckedItem(R.id.nav_product);
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.nav_message:
+            case R.id.nav_product:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessageFragment()).commit();
                 break;
-            case R.id.nav_chat:
+            case R.id.nav_order:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChatFragment()).commit();
                 break;
-            case R.id.nav_profile:
+            case R.id.nav_notification:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
                 break;
-            case R.id.nav_share:
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
+            case R.id.nav_profile:
+                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.nav_send:
-                Toast.makeText(this, "Send", Toast.LENGTH_SHORT).show();
+            case R.id.nav_logout:
+                Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, Login.class);
+                startActivity(intent);
+                finish();
                 break;
+
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
