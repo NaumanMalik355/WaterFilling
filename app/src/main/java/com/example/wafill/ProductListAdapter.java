@@ -32,12 +32,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final ProductListViewHolder holder, int position) {
-     //   final MyListData data = listData[position];
         holder.textView.setText(listData.get(position).productName);
-        holder.prodictId1.setText("Litre: "+Integer.toString(listData.get(position).bottleSize));
+        holder.prodictId1.setText("Litre: " + Integer.toString(listData.get(position).bottleSize));
         holder.txtDate.setText(listData.get(position).createdAt);
-        holder.textPrice.setText("Rs. "+Integer.toString(listData.get(position).price));
-       // holder.imageView.setImageResource(listData.get(position).imgURL);
+        holder.textPrice.setText("Rs. " + Integer.toString(listData.get(position).price));
+        // holder.imageView.setImageResource(listData.get(position).imgURL);
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +44,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                 Toast.makeText(view.getContext(), "Product Name is : " + holder.textView.getText(), Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
     @Override
@@ -55,18 +53,17 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public class ProductListViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
-        public TextView textView, prodictId1, txtDate,textPrice;
+        public TextView textView, prodictId1, txtDate, textPrice;
         public RelativeLayout relativeLayout;
 
         public ProductListViewHolder(@NonNull View itemView) {
             super(itemView);
-       //     imageView = itemView.findViewById(R.id.imageView);
+            //     imageView = itemView.findViewById(R.id.imageView);
             textView = itemView.findViewById(R.id.textView);
             prodictId1 = itemView.findViewById(R.id.prodictId1);
             txtDate = itemView.findViewById(R.id.txtDate);
-            textPrice=itemView.findViewById(R.id.txtPrce);
+            textPrice = itemView.findViewById(R.id.txtPrce);
             relativeLayout = itemView.findViewById(R.id.relativeLayoutProductList);
-
         }
     }
 }

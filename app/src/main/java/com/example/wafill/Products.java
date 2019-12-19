@@ -1,9 +1,9 @@
 package com.example.wafill;
 
 public class Products {
-    public  int bottleSize, price;
+    public int bottleSize, price;
     public String productId, productName, createdAt;
-   public String imgURL;
+    public String imgURL;
 
     public Products() {
 

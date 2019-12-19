@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessageFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_message);
         }
-
     }
 
     @Override
@@ -76,6 +75,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             backPresseTime = System.currentTimeMillis();
         }
-
     }
 }

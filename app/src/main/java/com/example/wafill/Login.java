@@ -35,7 +35,6 @@ public class Login extends AppCompatActivity {
         email = findViewById(R.id.txtEmail);
         password = findViewById(R.id.txtPassword);
         firebaseAuth = FirebaseAuth.getInstance();
-
     }
 
     public void showDashboard(View view) {
@@ -52,7 +51,7 @@ public class Login extends AppCompatActivity {
         } else {
             email.setError(null);
             password.setError(null);
-            final ProgressDialog progressDialog=new ProgressDialog(this);
+            final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Logging in. Please wait.");
             progressDialog.setCancelable(false);
             progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -70,7 +69,6 @@ public class Login extends AppCompatActivity {
                             }
                         }
                     });
-
         }
     }
 

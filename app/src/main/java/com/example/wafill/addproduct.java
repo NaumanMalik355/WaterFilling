@@ -43,6 +43,7 @@ public class addproduct extends AppCompatActivity {
     DatabaseReference databaseReference;
     Calendar calendar;
     DatePickerDialog datePickerDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,21 +59,20 @@ public class addproduct extends AppCompatActivity {
         btnCreateProduct = findViewById(R.id.createProductId);
         uploadImage.setEnabled(false);
         btnCreateProduct.setEnabled(false);
-        final Date da=new Date();
 
         createdAt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calendar=Calendar.getInstance();
-                int day=calendar.get(Calendar.DAY_OF_MONTH);
-                int month=calendar.get(Calendar.MONTH);
-                int year=calendar.get(Calendar.YEAR);
-                datePickerDialog=new DatePickerDialog(addproduct.this, new DatePickerDialog.OnDateSetListener() {
+                calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+                datePickerDialog = new DatePickerDialog(addproduct.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
-                        createdAt.setText(mDay+"/"+(mMonth+1)+"/"+mYear);
+                        createdAt.setText(mDay + "/" + (mMonth + 1) + "/" + mYear);
                     }
-                },day,month,year);
+                }, day, month, year);
                 datePickerDialog.show();
             }
         });
@@ -122,10 +122,8 @@ public class addproduct extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     downloadUrl = uri.toString();
-                                    //Toast.makeText(addproduct.this, "Created Successfully"+uri.toString(), Toast.LENGTH_SHORT).show();
                                 }
                             });
-
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -147,12 +145,12 @@ public class addproduct extends AppCompatActivity {
         String id = databaseReference.push().getKey();
 
         Products products = new Products();
-        products.bottleSize=bottleSizeInput;
-        products.price=priceInput;
-        products.productId=id;
-        products.productName=productNameInput;
-        products.createdAt=createdAtInput;
-        products.imgURL=downloadUrl;
+        products.bottleSize = bottleSizeInput;
+        products.price = priceInput;
+        products.productId = id;
+        products.productName = productNameInput;
+        products.createdAt = createdAtInput;
+        products.imgURL = downloadUrl;
 
         databaseReference.child(id).setValue(products);
         Toast.makeText(this, "New Product created", Toast.LENGTH_SHORT).show();

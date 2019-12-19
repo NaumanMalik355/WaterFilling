@@ -38,8 +38,6 @@ import java.util.List;
 public class MessageFragment extends Fragment {
     FloatingActionButton floatingActionButton;
     String userId;
-    String productName, daate;
-    int size;
 
     @Nullable
     @Override
@@ -47,6 +45,7 @@ public class MessageFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_message, container, false);
         final ArrayList<Products> productsList = new ArrayList<>();
+
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userId = currentFirebaseUser.getUid();
 
@@ -56,7 +55,7 @@ public class MessageFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(productListAdapter);
 
-        final ProgressDialog progressDialog=new ProgressDialog(getContext());
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progressDialog.setMessage("Loading. please wait");
         progressDialog.setCancelable(false);
@@ -72,33 +71,22 @@ public class MessageFragment extends Fragment {
         });
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-
         databaseReference.child("Products").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                       // Products products = ;
-//                    productName = products.getProductName();
-//                    daate = products.getCreatedAt();
-//                    size = products.getBottleSize();
-                        Products updated=new Products();
-                        updated.productName=ds.getValue(Products.class).productName;
-
-                        updated.createdAt=ds.getValue(Products.class).createdAt;
-//                        Toast.makeText(getContext(),"ndw is"+updated.createdAt,Toast.LENGTH_LONG).show();
-                    // updated.productId=ds.getValue(Products.class).productId;
-                        updated.price=ds.getValue(Products.class).price;
-                        updated.bottleSize=ds.getValue(Products.class).bottleSize;
-                        updated.price=ds.getValue(Products.class).price;
-                       productsList.add(updated);
-                       progressDialog.dismiss();
-
+                        Products updated = new Products();
+                        updated.productName = ds.getValue(Products.class).productName;
+                        updated.createdAt = ds.getValue(Products.class).createdAt;
+                        updated.bottleSize = ds.getValue(Products.class).bottleSize;
+                        updated.price = ds.getValue(Products.class).price;
+                        productsList.add(updated);
+                        progressDialog.dismiss();
                     }
-                   productListAdapter.notifyDataSetChanged();
+                    productListAdapter.notifyDataSetChanged();
                 } catch (Exception ex) {
-                    Toast.makeText(getContext(), "error now is" + ex.getMessage(), Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(getContext(), "Try to resolve this error: " + ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -107,28 +95,9 @@ public class MessageFragment extends Fragment {
                 System.out.println(databaseError.toException());
             }
         });
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                    for(DataSnapshot dataSnap : ds.getChildren()){
-//                        Products getFirebaseData = new Products();
-//                        getFirebaseData.setProductName(ds.child(userId).getValue(Products.class).getProductName());
-//                        Toast.makeText(getContext(), getFirebaseData.getProductName(), Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
         return view;
     }
-
+//  Moving from one Fragment to new Fragment
 //    public void clickButton(View view){
 //
 //        Intent intent=new Intent(getContext(),addproduct.class);

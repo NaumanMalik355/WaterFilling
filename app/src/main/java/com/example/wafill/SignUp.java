@@ -31,8 +31,8 @@ public class SignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_sign_up);
+
         username = findViewById(R.id.txtUsername);
         emailAddress = findViewById(R.id.textEmail);
         address = findViewById(R.id.txtAddress);
@@ -40,8 +40,8 @@ public class SignUp extends AppCompatActivity {
         password = findViewById(R.id.textPassword);
 
         //It will create the collection(Node) name Users
-        databaseReference=FirebaseDatabase.getInstance().getReference("Users");
-        firebaseAuth=FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     public void showDasha(View view) {
@@ -68,17 +68,17 @@ public class SignUp extends AppCompatActivity {
             address.setError(null);
             number.setError(null);
             password.setError(null);
-            final ProgressDialog progressDialog=new ProgressDialog(this);
+            final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             progressDialog.setMessage("Loading. please wait");
             progressDialog.show();
-            firebaseAuth.createUserWithEmailAndPassword(emailInput,passwordInput)
+            firebaseAuth.createUserWithEmailAndPassword(emailInput, passwordInput)
                     .addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                String id=databaseReference.push().getKey();
-                                final Users users=new Users(id,usernameInput,emailInput,addressInput,phoneInput,passwordInput);
+                            if (task.isSuccessful()) {
+                                String id = databaseReference.push().getKey();
+                                final Users users = new Users(id, usernameInput, emailInput, addressInput, phoneInput, passwordInput);
                                 FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -89,8 +89,7 @@ public class SignUp extends AppCompatActivity {
                                         startActivity(dashboardActivity);
                                     }
                                 });
-                            }else{
-
+                            } else {
                             }
                         }
                     });

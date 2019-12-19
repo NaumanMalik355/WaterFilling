@@ -74,13 +74,13 @@
                     android:layout_height="60dp"
                     android:elevation="10dp"
                     android:scaleType="centerCrop" />
+
                 <Button
                     android:id="@+id/uploadImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="uploadingProduct"
-                    android:text="Upload"
-                    />
+                    android:text="Upload" />
 
             </LinearLayout>
 
@@ -90,8 +90,8 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:background="#26A699"
-                android:text="Create New Product"
                 android:onClick="createProduct"
+                android:text="Create New Product"
                 android:textColor="#ffffff"
                 android:textSize="15sp" />
         </LinearLayout>
