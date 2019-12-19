@@ -12,10 +12,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductListViewHolder> {
-    private MyListData[] listData;
+import java.util.ArrayList;
 
-    public ProductListAdapter(MyListData[] listData) {
+public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductListViewHolder> {
+    private ArrayList<Products> listData;
+
+    public ProductListAdapter(ArrayList<Products> listData) {
         this.listData = listData;
     }
 
@@ -29,17 +31,17 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductListViewHolder holder, int position) {
-        final MyListData data = listData[position];
-        holder.textView.setText(listData[position].getDescription());
-        holder.prodictId1.setText(listData[position].getSubTitle());
-        holder.txtDate.setText(listData[position].getTxtDate());
-        holder.imageView.setImageResource(listData[position].getImgId());
+    public void onBindViewHolder(@NonNull final ProductListViewHolder holder, int position) {
+     //   final MyListData data = listData[position];
+        holder.textView.setText(listData.get(position).productName);
+        holder.prodictId1.setText(Integer.toString(listData.get(position).bottleSize)+" Litre");
+        holder.txtDate.setText(listData.get(position).createdAt);
+       // holder.imageView.setImageResource(listData.get(position).imgURL);
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "click on item: " + data.getDescription(), Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), "Product Name is : " + holder.textView.getText(), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -47,7 +49,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public int getItemCount() {
-        return listData.length;
+        return listData.size();
     }
 
     public class ProductListViewHolder extends RecyclerView.ViewHolder {
@@ -57,7 +59,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         public ProductListViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView);
+       //     imageView = itemView.findViewById(R.id.imageView);
             textView = itemView.findViewById(R.id.textView);
             prodictId1 = itemView.findViewById(R.id.prodictId1);
             txtDate = itemView.findViewById(R.id.txtDate);

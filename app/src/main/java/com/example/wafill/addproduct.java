@@ -122,7 +122,14 @@ public class addproduct extends AppCompatActivity {
         int priceInput = Integer.parseInt(price.getText().toString().trim());
         String id = databaseReference.push().getKey();
 
-        Products products = new Products(bottleSizeInput, priceInput, id, productNameInput, createdAtInput, downloadUrl);
+        Products products = new Products();
+        products.bottleSize=bottleSizeInput;
+        products.price=priceInput;
+        products.productId=id;
+        products.productName=productNameInput;
+        products.createdAt=createdAtInput;
+        products.imgURL=downloadUrl;
+
         databaseReference.child(id).setValue(products);
 
         productName.setText("");
