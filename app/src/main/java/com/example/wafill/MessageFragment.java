@@ -49,6 +49,7 @@ public class MessageFragment extends Fragment {
 
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userId = currentFirebaseUser.getUid();
+        Toast.makeText(getContext(), userId, Toast.LENGTH_SHORT).show();
 
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.ProductListRecycleriIew);
         final ProductListAdapter productListAdapter = new ProductListAdapter(productsList);
@@ -83,7 +84,7 @@ public class MessageFragment extends Fragment {
                         updated.bottleSize = ds.getValue(Products.class).bottleSize;
                         updated.price = ds.getValue(Products.class).price;
                         productsList.add(updated);
-                        Toast.makeText(getContext(), ds.getValue(Products.class).imgURL, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), ds.getValue(Products.class).imgURL, Toast.LENGTH_SHORT).show();
                     }
                     productListAdapter.notifyDataSetChanged();
                 } catch (Exception ex) {
