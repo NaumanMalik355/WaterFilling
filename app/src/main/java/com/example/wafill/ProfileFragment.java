@@ -23,18 +23,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfileFragment extends Fragment {
-    TextView txtShowUserName,showEmailAddress,ShowPhoneNumber,ShowUserAddress;
+    TextView txtShowUserName, showEmailAddress, ShowPhoneNumber, ShowUserAddress;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        txtShowUserName=view.findViewById(R.id.showUsername);
-        showEmailAddress=view.findViewById(R.id.showEmailAddress);
-        ShowPhoneNumber=view.findViewById(R.id.showNumber);
-        ShowUserAddress=view.findViewById(R.id.showAddress);
+        txtShowUserName = view.findViewById(R.id.showUsername);
+        showEmailAddress = view.findViewById(R.id.showEmailAddress);
+        ShowPhoneNumber = view.findViewById(R.id.showNumber);
+        ShowUserAddress = view.findViewById(R.id.showAddress);
 
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progressDialog.setMessage("Loading. please wait");
         progressDialog.setCancelable(false);
         progressDialog.show();
@@ -49,12 +49,12 @@ public class ProfileFragment extends Fragment {
                 try {
                     progressDialog.dismiss();
                     Users users = dataSnapshot.getValue(Users.class);
-                    txtShowUserName.setText("Name: "+users.username);
-                    showEmailAddress.setText("Email: "+users.emailAddress);
-                    ShowPhoneNumber.setText("Phone: "+users.number);
-                    ShowUserAddress.setText("Address: "+users.address);
+                    txtShowUserName.setText("Name: " + users.username);
+                    showEmailAddress.setText("Email: " + users.emailAddress);
+                    ShowPhoneNumber.setText("Phone: " + users.number);
+                    ShowUserAddress.setText("Address: " + users.address);
                 } catch (Exception ex) {
-                    Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Try to resolve this error: " + ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -67,7 +67,7 @@ public class ProfileFragment extends Fragment {
 //        bundle.getString("hellorKey");
 //        Toast.makeText(getContext(),"rwn"+bundle,Toast.LENGTH_SHORT).show();
 
-return view;
+        return view;
 
     }
 }

@@ -59,6 +59,9 @@ public class addproduct extends AppCompatActivity {
         btnCreateProduct = findViewById(R.id.createProductId);
         uploadImage.setEnabled(false);
         btnCreateProduct.setEnabled(false);
+        calendar = Calendar.getInstance();
+        Toast.makeText(addproduct.this, calendar.getTime().toString(), Toast.LENGTH_SHORT).show();
+
 
         createdAt.setOnClickListener(new View.OnClickListener() {
             @Override

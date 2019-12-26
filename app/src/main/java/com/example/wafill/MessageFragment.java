@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -56,7 +57,6 @@ public class MessageFragment extends Fragment {
         recyclerView.setAdapter(productListAdapter);
 
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progressDialog.setMessage("Loading. please wait");
         progressDialog.setCancelable(false);
         progressDialog.show();
@@ -75,6 +75,7 @@ public class MessageFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try {
+                    progressDialog.show();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         Products updated = new Products();
                         updated.productName = ds.getValue(Products.class).productName;
@@ -82,12 +83,13 @@ public class MessageFragment extends Fragment {
                         updated.bottleSize = ds.getValue(Products.class).bottleSize;
                         updated.price = ds.getValue(Products.class).price;
                         productsList.add(updated);
-                        progressDialog.dismiss();
+                        Toast.makeText(getContext(), ds.getValue(Products.class).imgURL, Toast.LENGTH_SHORT).show();
                     }
                     productListAdapter.notifyDataSetChanged();
                 } catch (Exception ex) {
                     Toast.makeText(getContext(), "Try to resolve this error: " + ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
+                progressDialog.dismiss();
             }
 
             @Override

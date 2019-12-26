@@ -36,13 +36,33 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        checkInternetConnection();
+
         email = findViewById(R.id.txtEmail);
         password = findViewById(R.id.txtPassword);
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
     public void showDashboard(View view) {
+        ConnectivityManager manager = (ConnectivityManager) getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
+        if (null != activeNetwork) {
+            checkInternetConnection();
+//            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+//                Toast.makeText(this, "Wifi Enabled", Toast.LENGTH_SHORT).show();
+//            } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+//                Toast.makeText(this, "Mobile Data Network Enabled", Toast.LENGTH_SHORT).show();
+//            }
+        } else {
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void showSignUpScreen(View view) {
+        Intent signUpActivity = new Intent(this, SignUp.class);
+        startActivity(signUpActivity);
+    }
+
+    public void checkInternetConnection() {
         String emailInput = email.getText().toString().trim();
         String passwordInput = password.getText().toString().trim();
         if (emailInput.isEmpty()) {
@@ -59,7 +79,7 @@ public class Login extends AppCompatActivity {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Logging in. Please wait.");
             progressDialog.setCancelable(false);
-            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             progressDialog.show();
             firebaseAuth.signInWithEmailAndPassword(emailInput, passwordInput)
                     .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
@@ -76,25 +96,7 @@ public class Login extends AppCompatActivity {
                         }
                     });
         }
-    }
 
-    public void showSignUpScreen(View view) {
-        Intent signUpActivity = new Intent(this, SignUp.class);
-        startActivity(signUpActivity);
-    }
-    public void checkInternetConnection(){
-        ConnectivityManager manager=(ConnectivityManager)getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork=manager.getActiveNetworkInfo();
-        if(null!=activeNetwork){
-            if(activeNetwork.getType()==ConnectivityManager.TYPE_WIFI){
-                Toast.makeText(this, "Wifi Enabled", Toast.LENGTH_SHORT).show();
-            }
-            else if(activeNetwork.getType()==ConnectivityManager.TYPE_MOBILE){
-                Toast.makeText(this, "Mobile Data Network Enabled", Toast.LENGTH_SHORT).show();
-            }
-        }
-        else{
-            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
-        }
+
     }
 }

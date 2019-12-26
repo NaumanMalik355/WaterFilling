@@ -14,16 +14,16 @@
             android:title="Orders" />
         <item
             android:id="@+id/nav_notification"
-            android:icon="@drawable/ic_notifications"
-            android:title="Notification" />
+            android:icon="@drawable/ic_person"
+            android:title="My profile" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
                 android:id="@+id/nav_profile"
-                android:icon="@drawable/ic_person"
-                android:title="Profile" />
+                android:icon="@drawable/ic_settings"
+                android:title="Setting" />
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_signout"

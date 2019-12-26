@@ -92,6 +92,7 @@
                 android:background="#26A699"
                 android:onClick="createProduct"
                 android:text="Create New Product"
+                android:textAllCaps="false"
                 android:textColor="#ffffff"
                 android:textSize="15sp" />
         </LinearLayout>

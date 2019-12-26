@@ -42,6 +42,7 @@
         android:background="#26A699"
         android:onClick="showDashboard"
         android:text="Login"
+        android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="15sp" />
 

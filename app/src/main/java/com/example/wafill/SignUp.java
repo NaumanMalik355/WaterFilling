@@ -69,7 +69,7 @@ public class SignUp extends AppCompatActivity {
             number.setError(null);
             password.setError(null);
             final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             progressDialog.setMessage("Loading. please wait");
             progressDialog.show();
             firebaseAuth.createUserWithEmailAndPassword(emailInput, passwordInput)

@@ -79,6 +79,7 @@
                 android:background="#26A699"
                 android:onClick="showDasha"
                 android:text="Create New Account"
+                android:textAllCaps="false"
                 android:textColor="#ffffff"
                 android:textSize="15sp" />
         </LinearLayout>
